@@ -13,5 +13,7 @@
  *
  *= require cerulean/loader
  *= require cerulean/bootswatch
+ *= require bootstrap_and_overrides
+ *= require font-awesome
  *= require_self
  */

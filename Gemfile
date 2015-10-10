@@ -28,6 +28,9 @@ gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
+gem "font-awesome-rails"
+gem 'devise'
+gem 'ransack'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
