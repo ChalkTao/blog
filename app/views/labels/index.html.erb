@@ -1,27 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Labels</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <h2>
     <% @labels.each do |label| %>
-      <tr>
-        <td><%= label.name %></td>
-        <td><%= link_to 'Show', label %></td>
-        <td><%= link_to 'Edit', edit_label_path(label) %></td>
-        <td><%= link_to 'Destroy', label, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <span class="label label-default" style="margin-right: 1rem">
+          <%= label.name %> 
+          <%= link_to 'x', label, method: :delete %>
+        </span>
     <% end %>
-  </tbody>
-</table>
+  </h2>
 
 <br>
 
-<%= link_to 'New Label', new_label_path %>
+<%= link_to 'New Label', new_label_path, :class => 'btn btn-primary'  %>

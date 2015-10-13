@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'home/about'
 
-  resources :labels
+  resources :labels, except: [:edit]
   resources :articles
   resource :settings
   resource :profile
