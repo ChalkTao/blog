@@ -1,0 +1,10 @@
+zh-CN:
+  activerecord:
+    models:
+      articles: 文章
+    attributes:
+      articles:
+         id: 文章id
+         title: 标题
+         content: 内容
+         create_at: 创建时间

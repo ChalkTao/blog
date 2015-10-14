@@ -5,6 +5,6 @@ class Article
   field :content, type: String
   field :visit_count, type: Integer, default: 0
 
-  has_and_belongs_to_many :labels
+  has_and_belongs_to_many :labels, counter_cache: true
 
 end
