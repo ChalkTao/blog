@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :sessions => "admin/sessions" }
+  devise_for :users
   root 'home#index'
 
   get 'home/index'
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :articles, only: [:index, :show]
 
   namespace :admin do
+    root 'articles#index'
 		resources :labels, except: [:edit]
   	resources :articles
   end
