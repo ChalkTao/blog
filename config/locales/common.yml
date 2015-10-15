@@ -8,3 +8,7 @@ zh-CN:
       articles: 我的文章
       labels: 管理标签
       search: 搜索文章
+    title:
+      new_article: 创建文章
+      edit_article: 更新文章
+

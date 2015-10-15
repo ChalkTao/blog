@@ -20,7 +20,7 @@ zh-CN:
       unconfirmed: "继续操作前请先确认您的帐号。"
     mailer:
       confirmation_instructions:
-        subject: "来自ezcms的注册确认邮件"
+        subject: "注册确认邮件"
       reset_password_instructions:
         subject: "重置密码信息"
       unlock_instructions:
