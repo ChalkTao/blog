@@ -1,12 +1,12 @@
 <h1>Listing Labels</h1>
-  <h2>
+  <h3>
     <% @labels.each do |label| %>
         <span class="label label-default" style="margin-right: 1rem">
           <%= label.name %> 
           <%= link_to 'x', admin_label_path(label), method: :delete %>
         </span>
     <% end %>
-  </h2>
+  </h3>
 
 <br>
 
