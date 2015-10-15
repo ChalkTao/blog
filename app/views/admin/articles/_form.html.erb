@@ -22,14 +22,6 @@
     </div>
     <%= error_span(@article[:title]) %>
   </div>
-  
-  <div class="control-group">
-    <%= f.label t("models.articles.attributes.content"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :content, :class => 'form-control' %>
-    </div>
-    <%= error_span(@article[:content]) %>
-  </div>
 
   <br/>
   <div class="control-group">
@@ -39,7 +31,7 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="edit">
-        <%= f.text_area :content, :class => 'form-control', :style => 'border-top: none' %>
+        <%= f.text_area :content, :class => 'markdown-editor', :style => 'border-top: none, height: 436px' %>
       </div>
       <div class="tab-pane" id="preview">
         <div class="markdown-body"><%= markdown(@article[:content]) %> </div>
