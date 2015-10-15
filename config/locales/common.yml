@@ -2,6 +2,14 @@ zh-CN:
   models:
     labels:
       create: 创建标签
+    articles:
+      edit: 编辑
+      preview: 预览
+      attributes:
+        id: 文章id
+        title: 标题
+        content: 内容
+        create_at: 创建时间
 
   admin:
     navbar:	
@@ -11,4 +19,5 @@ zh-CN:
     title:
       new_article: 创建文章
       edit_article: 更新文章
+
 
