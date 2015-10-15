@@ -42,7 +42,8 @@
         <%= f.text_area :content, :class => 'form-control', :style => 'border-top: none' %>
       </div>
       <div class="tab-pane" id="preview">
-        <%= markdown(@article[:content]) %> 
+        <div class="markdown-body"><%= markdown(@article[:content]) %> </div>
+        
       </div>
     </div>
   </div>
