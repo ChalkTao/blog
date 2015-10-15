@@ -38,7 +38,7 @@
   </head>
   <body>
 
-    <%= render "navbar" %>
+    <%= render "layouts/admin/navbar" %>
     <div class="container">
       <div class="row">
         <div class="col-lg-9 mb-10">
@@ -46,11 +46,11 @@
           <%= yield %>
         </div>
         <div class="col-lg-3">
-          <%= render "sider" %>
+          <%= render "layouts/admin/sider" %>
         </div><!--/span-->
       </div><!--/row-->
     </div> <!-- /container -->
-    <%= render "footer" %>
+    <%= render "layouts/admin/footer" %>
     <%= yield(:page_modal) if content_for?(:page_modal) %>
     <%= javascript_include_tag "application" %>
     <%= yield(:page_javascript) if content_for?(:page_javascript) %>

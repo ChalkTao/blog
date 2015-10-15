@@ -8,12 +8,12 @@
     <%= link_to "BLOG", root_path, class: "navbar-brand" %>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "我的文章", articles_path %></li>
-        <li><%= link_to "管理标签", labels_path %></li>
+        <li><%= link_to t('admin.navbar.articles'), admin_articles_path %></li>
+        <li><%= link_to t('admin.navbar.labels'), admin_labels_path %></li>
       </ul>
-      <%= form_tag(articles_path, method: :get, class: "navbar-form navbar-left search-form") do %>
+      <%= form_tag(admin_articles_path, method: :get, class: "navbar-form navbar-left search-form") do %>
         <div class="input-group">
-          <%= search_field_tag "q[name_cont]", params["q"] && params["q"]["name_cont"], class: "form-control input-sm", placeholder: "文章名称" %>
+          <%= search_field_tag "q[name_cont]", params["q"] && params["q"]["name_cont"], class: "form-control input-sm", placeholder: t('admin.navbar.search') %>
           <span class="input-group-btn">
             <button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </span>
@@ -22,10 +22,10 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>
-          <li><%= link_to "退出", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to t('helpers.links.log_out'), destroy_user_session_path, method: :delete %></li>
         <% else %>
-          <li><%= link_to "登录", new_user_session_path %></li>
-          <li><%= link_to "注册", new_user_registration_path %></li>
+          <li><%= link_to t('helpers.links.sign_in'), new_user_session_path %></li>
+          <li><%= link_to t('helpers.links.sign_up'), new_user_registration_path %></li>
         <% end %>
       </ul>
     </div>

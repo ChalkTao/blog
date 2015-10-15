@@ -1,4 +1,4 @@
-class LabelsController < ApplicationController
+class Admin::LabelsController < Admin::AdminController
   before_action :set_label, only: [:show, :edit, :update, :destroy]
 
   # GET /labels
@@ -24,7 +24,7 @@ class LabelsController < ApplicationController
 
     respond_to do |format|
       if @label.save
-        format.html { redirect_to labels_path, notice: 'Label was successfully created.' }
+        format.html { redirect_to admin_labels_path, notice: 'Label was successfully created.' }
         format.json { render :show, status: :created, location: @label }
       else
         format.html { render :new }

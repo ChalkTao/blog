@@ -16,6 +16,9 @@ en:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      sign_in: Login
+      sign_up: Signup
+      log_out: Logout
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

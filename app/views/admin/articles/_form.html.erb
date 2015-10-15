@@ -1,4 +1,4 @@
-<%= form_for @article, :html => { :class => "form-horizontal article" } do |f| %>
+<%= form_for [:admin, @article], :html => { :class => "form-horizontal article" } do |f| %>
 
     <% if @article.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -33,6 +33,6 @@
 
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            articles_path, :class => 'btn btn-default' %>
+            admin_articles_path, :class => 'btn btn-default' %>
 
 <% end %>

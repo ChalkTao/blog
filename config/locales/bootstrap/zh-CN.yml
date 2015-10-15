@@ -18,6 +18,7 @@ zh-CN:
       edit: "编辑"
       sign_in: 登录
       sign_up: 注册
+      log_out: 退出
       update: 更新
       forgot_password: 找回密码
       send_password: 发送找回邮件

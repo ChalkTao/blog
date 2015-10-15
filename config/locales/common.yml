@@ -1,0 +1,10 @@
+zh-CN:
+  models:
+    labels:
+      create: 创建标签
+
+  admin:
+    navbar:	
+      articles: 我的文章
+      labels: 管理标签
+      search: 搜索文章
