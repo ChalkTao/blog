@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2><%= t('helpers.links.edit') %> <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -28,12 +28,10 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit "Update", class: "btn btn-primary" %>
+    <%= f.submit t("helpers.links.update"), class: "btn btn-primary" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: t("helpers.links.confirm") }, method: :delete %></p>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<%= link_to t("helpers.links.back"), :back %>
