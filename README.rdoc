@@ -1,28 +1,14 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Blog build on RoR, using bootstrap and mongoid
 
-Things you may want to cover:
+=== USAGE
 
-* Ruby version
+* install dependency: <tt>bundle install</tt>
 
-* System dependencies
+* start localhost mongo server: <tt>mongod &</tt>, make sure you have mongod installed
 
-* Configuration
+* start server: <tt>rails s</tt>
 
-* Database creation
+* view website on http://localhost:3000
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
