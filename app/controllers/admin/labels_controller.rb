@@ -52,7 +52,7 @@ class Admin::LabelsController < Admin::AdminController
   def destroy
     @label.destroy
     respond_to do |format|
-      format.html { redirect_to labels_url, notice: 'Label was successfully destroyed.' }
+      format.html { redirect_to admin_labels_url, notice: 'Label was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

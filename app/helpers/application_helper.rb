@@ -6,6 +6,9 @@ class CodeRayify < Redcarpet::Render::HTML
 end
 
 def markdown(text)
+  if text === nil
+    return "";
+  end
   coderayified = CodeRayify.new(:filter_html => true, 
                                 :hard_wrap => true)
   options = {
