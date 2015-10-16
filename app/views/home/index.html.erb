@@ -1,2 +1,17 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<%- model_class = Article -%>
+<div class="page-header">
+  <h1><%=t 'app.index.title' %></h1>
+</div>
+
+<% @recent_articles.each do |article| %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= article.title %></h4>
+  </div>
+  
+  <div class="panel-body">
+   <div class="markdown-body"><%= markdown(article.content) %> </div>
+  </div>
+</div>
+  
+<% end %>

@@ -1,16 +1,14 @@
 <%- model_class = Article -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @article.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @article.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:visit_count) %>:</strong></dt>
-  <dd><%= @article.visit_count %></dd>
-</dl>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @article.title %>
+  </div>
+  
+  <div class="panel-body">
+   <div class="markdown-body"><%= markdown(@article.content) %> </div>
+  </div>
+</div>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               admin_articles_path, :class => 'btn btn-default'  %>

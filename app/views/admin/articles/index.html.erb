@@ -5,17 +5,25 @@
 
 <% @articles.each do |article| %>
 <div class="panel panel-default">
-  <div class="panel-heading"><%= article.title %></div>
-  <div class="panel-body">
-   <div class="markdown-body"><%= markdown(article.content) %> 
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-10">
+        <%= article.title %>
+      </div>
+      <div class="col-sm-2">
+        <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_article_path(article), :class => 'btn btn-default btn-xs' %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_article_path(article),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
-    </div>
+      </div>
+    </div> 
+  </div>
+  
+  <div class="panel-body">
+   <div class="markdown-body"><%= markdown(article.content) %> </div>
   </div>
 </div>
   

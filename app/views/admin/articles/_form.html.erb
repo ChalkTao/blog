@@ -34,7 +34,9 @@
         <%= f.text_area :content, :class => 'markdown-editor', :style => 'border-top: none, height: 436px' %>
       </div>
       <div class="tab-pane" id="preview">
-        <div class="markdown-body"><%= markdown(@article[:content]) %> </div>
+        <text class="markdown-editor">
+          <div class="markdown-body"><%= markdown(@article[:content]) %> </div>
+        </text>
         
       </div>
     </div>
