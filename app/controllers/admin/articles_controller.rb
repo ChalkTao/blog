@@ -1,5 +1,6 @@
 class Admin::ArticlesController < Admin::AdminController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  include ApplicationHelper
 
   # GET /articles
   # GET /articles.json
@@ -59,6 +60,10 @@ class Admin::ArticlesController < Admin::AdminController
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def preview
+    render plain: markdown(params[:content])
   end
 
   private

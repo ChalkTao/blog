@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'articles#index'
 		resources :labels, except: [:edit]
-  	resources :articles
+  	resources :articles do 
+      collection do
+        post :preview
+      end
+    end
   end
   resource :settings
   resource :profile

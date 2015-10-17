@@ -30,13 +30,13 @@
       <li role="presentation" ng-class="{ active: !body_active }"><a href="#" ng-click="changeToPreview()"><%= t("models.articles.preview") %></a></li>
     </ul>
     <div>
-      <div ng-show="body_active" ng-model= 'content'>
-        <%= f.text_area :content, :class => 'markdown-editor', :style => 'border-top: none, height: 436px' %>
+      <div ng-show="body_active">
+        <%= f.text_area :content, :class => 'markdown-editor', :style => 'border-top: none, height: 436px', "ng-model"=>'content'  %>
       </div>
       <div ng-hide="body_active">
-        <text class="markdown-editor">
-          <div class="markdown-body"> <%= markdown(@article[:content]) %> </div>
-        </text>
+        <div class="markdown-editor">
+          <div class="markdown-body" ng-bind-html="trustAsPreviewHTML()" > </div>
+        </div>
         
       </div>
     </div>

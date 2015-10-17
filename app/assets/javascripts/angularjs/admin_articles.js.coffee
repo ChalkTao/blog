@@ -3,14 +3,12 @@
   $scope.body_active = true
 
   $scope.init = (id)->
-    url = '/admin/posts/' + id + '.json'
+    url = '/admin/articles/' + id + '.json'
     $http
       url: url
       method: 'GET'
     .success (res)->
       $scope.title = res.title
-      $scope.type = res.type
-      $scope.labels = res.labels
       $scope.content = res.content
 
   $scope.changeToBody = ->
@@ -19,7 +17,7 @@
   $scope.changeToPreview = ->
     $scope.body_active = false
     $scope.previewHTML = 'Loading...'
-    $http.post '/admin/posts/preview', { content: $scope.content }
+    $http.post '/admin/articles/preview', { content: $scope.content }
     .success (res)->
       $scope.previewHTML = res
 
