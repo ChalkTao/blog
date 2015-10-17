@@ -10,7 +10,13 @@
   </div>
   
   <div class="panel-body">
-   <div class="markdown-body"><%= markdown(article.content) %> </div>
+  	<div>
+      <% article.labels.each do |label| %>
+      <span class="label label-primary" style="margin-right: 0.8rem; margin-bottom: 0.8rem"><%= label.name %> </span>
+      <% end %>
+      <hr>
+    </div>
+   	<div class="markdown-body"><%= markdown(article.content) %> </div>
   </div>
 </div>
   
