@@ -10,11 +10,11 @@
     .success (res)->
       $scope.title = res.title
       $scope.content = res.content
-      $scope.labels = res.labels || []
-      $http 
-        url: '/admin/labels.json'
-        method: 'GET'
-      .success (res)->
+      $scope.labels = res.labels || ""
+    $http 
+      url: '/admin/labels.json'
+      method: 'GET'
+    .success (res)->
         $scope.all_labels = res
 
   $scope.changeToBody = ->
@@ -34,12 +34,8 @@
     target = $scope.all_labels.indexOf(label)
     if target > -1
       $scope.all_labels.splice(target, 1)
-    $scope.labels.push(label)
-
-  $scope.removeLabel = (label)->
-    target = $scope.labels.indexOf(label)
-    if target > -1
-      $scope.labels.splice(target, 1)
-    $scope.all_labels.push(label)
-
+    if $scope.labels
+      $scope.labels += ", " + label.name
+    else
+      $scope.labels = label.name
 ]

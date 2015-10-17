@@ -5,6 +5,12 @@ class Article
   field :content, type: String
   field :visit_count, type: Integer, default: 0
 
-  has_and_belongs_to_many :labels, counter_cache: true
+  has_and_belongs_to_many :labels
+
+  def labels_content( need_blank=false )
+    content = self.labels.collect { |label| label.name }.join(", ")
+    content = I18n.t('none') if content.blank? and !need_blank
+    content
+  end
 
 end

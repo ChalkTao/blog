@@ -13,6 +13,15 @@ class Admin::ArticlesController < Admin::AdminController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    respond_to do |format|
+      format.html { }
+      format.json { render :json=> {
+        title: @article.title,
+        labels: @article.labels_content(true),
+        content: @article.content
+      }
+     }
+    end
   end
 
   # GET /articles/new
@@ -28,12 +37,12 @@ class Admin::ArticlesController < Admin::AdminController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    labels = params.delete(:labels).to_s
+    labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to [:admin, @article], notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -45,7 +54,7 @@ class Admin::ArticlesController < Admin::AdminController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    labels = params.delete(:labels).to_s
+    labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
 
     respond_to do |format|
@@ -64,7 +73,7 @@ class Admin::ArticlesController < Admin::AdminController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to admin_articles_path, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -89,10 +98,11 @@ class Admin::ArticlesController < Admin::AdminController
     end
 
     def initialize_or_create_labels(labels)
+      @article.labels = []
       labels.split(",").each do |name|
         label = Label.find_or_initialize_by(name: name.strip)
         label.save!
-        @articles.labels << label
+        @article.labels << label
       end
     end
 end

@@ -1,14 +1,14 @@
 <%- model_class = Article -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
 
 <% @articles.each do |article| %>
+<h3><%= article.title %></h3>
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="row">
       <div class="col-sm-10">
-        <%= article.title %>
+        <% article.labels.each do |label| %>
+        <span class="label label-default" style="margin-right: 1rem"><%= label.name %> </span>
+        <% end %>
       </div>
       <div class="col-sm-2">
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -23,7 +23,7 @@
   </div>
   
   <div class="panel-body">
-   <div class="markdown-body"><%= markdown(article.content) %> </div>
+    <div class="markdown-body"><%= markdown(article.content) %> </div>
   </div>
 </div>
   

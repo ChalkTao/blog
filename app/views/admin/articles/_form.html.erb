@@ -23,13 +23,11 @@
     <%= error_span(@article[:title]) %>
   </div>
   
-  <div class="control-group", ng-model="labels">
+  <div class="control-group">
     <label class="control-label"> <%= t("admin.form.has_labels") %>
     </label>
-    <div class="label-panel" ng-repeat="label in labels">
-        <a class="label label-primary label-style" ng-click="removeLabel(label)">
-          {{ label.name }}
-        </a>
+    <div class="controls">
+      <%= f.text_field :labels, :class => 'form-control', "ng-model"=>"labels" %>
     </div>
   </div>
 
