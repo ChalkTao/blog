@@ -1,6 +1,7 @@
 zh-CN:
   models:
     labels:
+      name: 标签
       create: 创建标签
     articles:
       edit: 编辑
@@ -23,6 +24,10 @@ zh-CN:
     title:
       new_article: 创建文章
       edit_article: 更新文章
+    form:
+      submit: 提交
+      has_labels: 当前标签
+      other_labels: 其他标签
 
   app:
     sider:

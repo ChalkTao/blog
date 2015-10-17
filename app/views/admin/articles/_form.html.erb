@@ -15,12 +15,32 @@
     </div>
   <% end %>
 
-  <div class="control-group">
+  <div class="control-group" ng-model="title">
     <%= f.label t("models.articles.attributes.title"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :title, :class => 'form-control' %>
     </div>
     <%= error_span(@article[:title]) %>
+  </div>
+  
+  <div class="control-group", ng-model="labels">
+    <label class="control-label"> <%= t("admin.form.has_labels") %>
+    </label>
+    <div class="label-panel" ng-repeat="label in labels">
+        <a class="label label-primary label-style" ng-click="removeLabel(label)">
+          {{ label.name }}
+        </a>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label"> <%= t("admin.form.other_labels") %>
+    </label>
+    <div class="label-panel" ng-repeat="label in all_labels">
+        <a class="label label-default" ng-click="addLabel(label)">
+          {{ label.name }}
+        </a>
+    </div>
   </div>
 
   <br/>

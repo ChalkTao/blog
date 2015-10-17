@@ -1,5 +1,7 @@
 class Admin::ArticlesController < Admin::AdminController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_label, only: [:new, :edit]
+
   include ApplicationHelper
 
   # GET /articles
@@ -26,6 +28,8 @@ class Admin::ArticlesController < Admin::AdminController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    labels = params.delete(:labels).to_s
+    initialize_or_create_labels(labels)
 
     respond_to do |format|
       if @article.save
@@ -41,6 +45,9 @@ class Admin::ArticlesController < Admin::AdminController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    labels = params.delete(:labels).to_s
+    initialize_or_create_labels(labels)
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
@@ -72,8 +79,20 @@ class Admin::ArticlesController < Admin::AdminController
       @article = Article.find(params[:id])
     end
 
+    def set_label
+      @labels = Label.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content)
+    end
+
+    def initialize_or_create_labels(labels)
+      labels.split(",").each do |name|
+        label = Label.find_or_initialize_by(name: name.strip)
+        label.save!
+        @articles.labels << label
+      end
     end
 end
