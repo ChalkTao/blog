@@ -6,8 +6,6 @@
     <% @side_label.each do |label| %>
     <li><%= link_to label.name, admin_label_path(label) %></li>
     <% end %>
-    <li class="nav-header"><%= t("app.sider.abouts") %></li>
-  	<li><%= link_to t("app.sider.about_me"), home_about_path %></li>
 
   </ul>
 </div>
