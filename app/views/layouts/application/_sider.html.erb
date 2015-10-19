@@ -1,10 +1,13 @@
 <div class="well sidebar-nav">
   <ul class="nav nav-list">
   	<li class="nav-header"><%= t("app.sider.articles") %></li>
-  	<li><%= link_to t("app.sider.articles"), home_index_path %></li>
+  	<li><%= link_to t("app.sider.recent_articles"), home_index_path %></li>
     <li class="nav-header"><%= t("app.sider.labels") %></li>
     <% @side_label.each do |label| %>
     <li><%= link_to label.name, admin_label_path(label) %></li>
     <% end %>
+    <li class="nav-header"><%= t("app.sider.abouts") %></li>
+  	<li><%= link_to t("app.sider.about_me"), home_about_path %></li>
+
   </ul>
 </div>

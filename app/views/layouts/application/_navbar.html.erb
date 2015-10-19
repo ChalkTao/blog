@@ -8,6 +8,8 @@
     <%= link_to "BLOG", root_path, class: "navbar-brand" %>
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
+        <li><%= link_to t('app.navbar.home'), home_index_path %></li>
+        <li><%= link_to t('app.navbar.about'), home_about_path %></li>
       </ul>
       <%= form_tag(articles_path, method: :get, class: "navbar-form navbar-left search-form") do %>
         <div class="input-group">

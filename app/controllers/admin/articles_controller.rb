@@ -7,7 +7,7 @@ class Admin::ArticlesController < Admin::AdminController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.desc(:created_at)
   end
 
   # GET /articles/1

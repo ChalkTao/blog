@@ -30,9 +30,15 @@ zh-CN:
       other_labels: 其他标签
 
   app:
+    navbar: 
+      home: 首页
+      about: 关于我
     sider:
-      articles: 最新文章
+      articles: 文章
       labels: 标签
+      abouts: 关于
+      recent_articles: 最新文章
+      about_me: 关于我
     index:
       title: 最新文章
 

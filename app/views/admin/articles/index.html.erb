@@ -1,13 +1,13 @@
 <%- model_class = Article -%>
 
 <% @articles.each do |article| %>
-<h3><%= article.title %></h3>
+<h3><%= link_to article.title, admin_article_path(article)%></h3>
 <div class="panel panel-default">
   <div class="panel-heading">
     <div class="row">
       <div class="col-sm-10">
         <% article.labels.each do |label| %>
-        <span class="label label-default" style="margin-right: 1rem"><%= label.name %> </span>
+        <span class="label label-primary" style="margin-right: 1rem"><%= label.name %> </span>
         <% end %>
       </div>
       <div class="col-sm-2">

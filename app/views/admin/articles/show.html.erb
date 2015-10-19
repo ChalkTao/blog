@@ -1,20 +1,17 @@
 <%- model_class = Article -%>
 <h4>
+  <%= @article.title %>
 </h4>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @article.title %>
+    <% @article.labels.each do |label| %>
+        <span class="label label-primary" style="margin-right: 1rem"><%= label.name %> 
+        </span>
+      <% end %>
   </div>
   
   <div class="panel-body">
-    <div><h4>
-        <% @article.labels.each do |label| %>
-        <span class="label label-default" style="margin-right: 1rem"><%= label.name %> 
-        </span>
-      <% end %></h4>
-    </div>
-    <br>
     
     <div class="markdown-body"><%= markdown(@article.content) %> </div>
   </div>
