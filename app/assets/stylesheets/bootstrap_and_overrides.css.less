@@ -94,10 +94,39 @@ body {
 }
 
 #article {
-  padding: 0 10px 60px 10px;
+  padding: 0 10px 20px 10px;
   box-shadow: 1px 2px 3px #ddd;
   margin-bottom: 10px;
   .markdown-body {
     margin-top: 20px;
   }
+  .time {
+    color: rgba(0,40,60,.6);
+  }
+}
+
+.chapter {
+    font-size: 18px;
+    margin: 15px 5px 20px 5px;
+    padding:0px;
+    width:auto;
+    overflow:hidden;
+}
+a.chapter:link    {color:rgba(0,45,60,.5);background-color:transparent;text-decoration:none;}
+a.chapter:visited {color:rgba(0,45,60,.5);background-color:transparent;text-decoration:none;}
+a.chapter:hover   {color:rgba(0,60,60,.8);background-color:transparent;text-decoration:none;}
+a.chapter:active  {color:rgba(0,45,60,.5);background-color:transparent;text-decoration:none;}
+.chapter .prev {
+    width:40%;
+    float:left;
+    text-align:left;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.chapter .next {
+    width:48%;
+    float:right;
+    text-align:right;
+    white-space:nowrap;    
+    overflow:hidden;
 }
