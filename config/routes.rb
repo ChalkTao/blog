@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
-  get 'labels/index'
-
-  get 'labels/show'
-
-  get 'articles/show'
 
   devise_for :users
+
   root 'home#index'
-
+  get 'labels/index'
+  get 'labels/show'
+  get 'articles/show'
   get 'home/index'
-
   get 'home/about'
+  get 'search/:keyword', to: 'home#search'
 
   resources :labels, only: [:index, :show]
   resources :articles, only: [:index, :show]
