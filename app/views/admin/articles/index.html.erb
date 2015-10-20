@@ -1,16 +1,33 @@
 <%- model_class = Article -%>
+<div class="page-header">
+<h1><%= t("admin.navbar.articles") %></h1>
+</div>
 
-<% @articles.each do |article| %>
-<h3><%= link_to article.title, admin_article_path(article)%></h3>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col-sm-10">
-        <% article.labels.each do |label| %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>标题</th>
+      <th>类别</th>
+      <th>发布于</th>
+      <th>标签</th>
+      <th>浏览</th>
+      <th>评论</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+    <tr>
+      <td><%= link_to article.title, admin_article_path(article)%></td>
+      <td></td>
+      <td><%= l(article.created_at) %></td>
+      <td><% article.labels.each do |label| %>
         <span class="label label-primary" style="margin-right: 1rem"><%= label.name %> </span>
         <% end %>
-      </div>
-      <div class="col-sm-2">
+      </td>
+      <td><%= article.visit_count %></td>
+      <td><%= link_to t("models.comments"), disques_count(article) %></td>
+      <td>
         <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_article_path(article), :class => 'btn btn-default btn-xs' %>
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -18,16 +35,12 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
-      </div>
-    </div> 
-  </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
   
-  <div class="panel-body">
-    <div class="markdown-body"><%= markdown(article.content) %> </div>
-  </div>
-</div>
-  
-<% end %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_admin_article_path,

@@ -1,10 +1,27 @@
-<div class="well sidebar-nav">
-  <ul class="nav nav-list">
-  	<li class="nav-header"><%= t("admin.sider.articles") %></li>
-  	<li><%= link_to t("admin.sider.new_article"), new_admin_article_path %></li>
-    <li class="nav-header"><%= t("admin.sider.labels") %></li>
-    <% @side_label.each do |label| %>
-    <li><%= link_to label.name, admin_label_path(label) %></li>
-    <% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+  	<div class="side"><%= t("admin.sider.articles") %></div> 
+  </div>
+  <!-- List group -->
+  <ul class="list-group">
+	  <li class="list-group-item">
+	    <%= link_to t("admin.sider.new_article"), new_admin_article_path %>
+	  </li>
+	  <li class="list-group-item">
+	    <%= link_to t("admin.sider.view_articles"), admin_articles_path %>
+	  </li>
+	</ul>
+
+	<div class="panel-heading">
+		<div class="side"><%= t("admin.sider.labels") %></div> 
+	</div>
+  <!-- List group -->
+  <ul class="list-group">
+  <% @side_label.each do |label| %>
+  	<li class="list-group-item">
+	    <span class="badge"><%= label.article_ids.length %></span>
+	    <%= link_to label.name, admin_label_path(label) %>
+	  </li>
+  <% end %>
   </ul>
 </div>

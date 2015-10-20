@@ -1,24 +1,16 @@
-<%- model_class = Article -%>
-<div class="page-header">
-  <h1><%=t 'app.index.title' %></h1>
-</div>
-
 <% @recent_articles.each do |article| %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= link_to article.title, article_path(article)%></h4>
-    <%= link_to t("models.comments"), disques_count(article) %>
-  </div>
-  
-  <div class="panel-body">
-  	<div>
-      <% article.labels.each do |label| %>
-      <span class="label label-primary" style="margin-right: 0.8rem; margin-bottom: 0.8rem"><%= label.name %> </span>
-      <% end %>
-      <hr>
-    </div>
-   	<div class="markdown-body"><%= markdown(article.content) %> </div>
-  </div>
+<div class="page-header">
+<h1><%= link_to article.title, article_path(article) %></h1>
 </div>
-  
+<article id="article">
+  <div class="time"><%= l(article.created_at) %><span class="pull-right"> <%= link_to t("models.comments"), disques_count(article) %>
+</span></div>
+  <h3>
+    <% article.labels.each do |label| %>
+      <span class="label label-primary" style="margin-right: 1rem"><%= label.name %> </span>
+    <% end %>
+  </h3>
+
+  <div class="markdown-body"><%= markdown(article.content) %> </div>
+</article>
 <% end %>
