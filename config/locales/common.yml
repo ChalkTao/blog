@@ -14,10 +14,12 @@ zh-CN:
     comments: 评论
     categories: 
       name: 分类
+      create: 新建分类
 
   admin:
     navbar:	
       articles: 我的文章
+      categories: 管理分类
       labels: 管理标签
       search: 搜索文章
     sider:

@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'articles#index'
 		resources :labels, except: [:edit]
+    resources :categories, except: [:edit]
+
   	resources :articles do 
       collection do
         post :preview

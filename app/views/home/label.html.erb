@@ -23,7 +23,7 @@
         <% end %>
       </td>
       <td><%= article.visit_count %></td>
-      <td><%= link_to t("models.comments"), disques_count(article) %></td>
+      <td><%= link_to t("models.comments"), disques_count(article, false) %></td>
     </tr>
     <% end %>
   </tbody>
