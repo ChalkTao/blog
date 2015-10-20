@@ -5,6 +5,9 @@ class Admin::LabelsController < Admin::AdminController
   # GET /labels.json
   def index
     @labels = Label.all
+    @labels.each do |label|
+      @articles_count = label.article_ids.length
+    end
   end
 
   # GET /labels/1

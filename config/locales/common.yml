@@ -11,6 +11,7 @@ zh-CN:
         title: 标题
         content: 内容
         create_at: 创建时间
+    comments: 评论
 
   admin:
     navbar:	
@@ -32,11 +33,10 @@ zh-CN:
   app:
     navbar: 
       home: 首页
-      about: 关于我
+      about: 关于
     sider:
       articles: 文章
       labels: 标签
-      abouts: 关于
       recent_articles: 最新文章
     index:
       title: 最新文章

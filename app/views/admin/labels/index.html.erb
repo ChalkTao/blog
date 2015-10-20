@@ -3,6 +3,7 @@
     <% @labels.each do |label| %>
         <span class="label label-default" style="margin-right: 1rem">
           <%= label.name %> 
+          <%= label.article_ids.length %>
           <%= link_to 'x', admin_label_path(label), method: :delete %>
         </span>
     <% end %>
