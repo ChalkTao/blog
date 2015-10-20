@@ -20,7 +20,11 @@ module ApplicationHelper
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
     markdown_to_html.render(text).html_safe
   end
-  def disques_count(article) 
+  def disques_count(article, admin) 
+    if admin
+      admin_article_path(article) + "#disqus_thread"
+    else
       article_path(article) + "#disqus_thread"
-end
+    end
+  end
 end

@@ -3,8 +3,9 @@
 <h1><%= link_to article.title, article_path(article) %></h1>
 </div>
 <article id="article">
-  <div class="time"><%= l(article.created_at) %><span class="pull-right"> <%= link_to t("models.comments"), disques_count(article) %>
-</span></div>
+  <div class="time"><%= l(article.created_at) %><span class="pull-right"> 
+  	<%= link_to t("models.comments"), disques_count(article, false), :"data-disqus-identifer" => article.id %></span>
+  </div>
   <h3>
     <% article.labels.each do |label| %>
       <span class="label label-primary" style="margin-right: 1rem"><%= label.name %> </span>
