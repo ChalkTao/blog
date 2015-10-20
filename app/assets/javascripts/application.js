@@ -15,4 +15,8 @@
 //= require angularjs
 //= require twitter/bootstrap
 
+function getUrlParam() {
+  var path = window.location.href.split('/');
+  return path[path.length-1];
+}
 
