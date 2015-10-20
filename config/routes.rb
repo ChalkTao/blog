@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'labels/index'
+
+  get 'labels/show'
+
   get 'articles/show'
 
   devise_for :users
@@ -8,7 +12,7 @@ Rails.application.routes.draw do
 
   get 'home/about'
 
-  resources :labels, only: [:index]
+  resources :labels, only: [:index, :show]
   resources :articles, only: [:index, :show]
 
   namespace :admin do

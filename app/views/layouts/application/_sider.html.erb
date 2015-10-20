@@ -17,7 +17,7 @@
   <% @side_label.each do |label| %>
   	<li class="list-group-item">
 	    <span class="badge"><%= label.article_ids.length %></span>
-	    <%= link_to label.name, admin_label_path(label) %>
+	    <%= link_to label.name, label_path(label) %>
 	  </li>
   <% end %>
   </ul>

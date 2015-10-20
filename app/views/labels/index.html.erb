@@ -1,0 +1,38 @@
+<div class="page-header">
+<h1><%= t("admin.navbar.labels") %></h1>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	<div class="side"><%= t("models.categories.name") %></div> 
+		  </div>
+		  <!-- List group -->
+		  <ul class="list-group">
+			  <li class="list-group-item">
+			  </li>
+			</ul>
+
+			
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	<div class="side"><%= t("models.labels.name") %></div> 
+		  </div>
+		  <!-- List group -->
+		  <ul class="list-group">
+		  <% @labels.each do |label| %>
+		  	<li class="list-group-item">
+			    <span class="badge"><%= label.article_ids.length %></span>
+			    <%= link_to label.name, label_path(label) %>
+			  </li>
+		  <% end %>
+		  </ul>
+		
+		</div>
+	</div>
+</div>
+
