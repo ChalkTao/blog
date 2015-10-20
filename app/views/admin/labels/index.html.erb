@@ -1,15 +1,30 @@
 <div class="page-header">
 <h1><%= t("admin.navbar.labels") %></h1>
 </div>
-  <h3>
-    <% @labels.each do |label| %>
-        <span class="label label-default" style="margin-right: 1rem">
-          <%= label.name %> 
-          <%= label.article_ids.length %>
-          <%= link_to 'x', admin_label_path(label), method: :delete %>
-        </span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>标签</th>
+      <th>文章数</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @labels.each do |label| %>
+  	<tr>
+  		<td><%= link_to label.name, admin_label_path(label)%></td>
+  		<td><%= label.article_ids.length %></td>
+  		<td>
+  			<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_label_path(label),
+                      :method => :delete,
+                      :data => { :confirm => t('helpers.links.confirm') },
+                      :class => 'btn btn-xs btn-danger' %>
+  		</td>
+  	</tr>
     <% end %>
-  </h3>
-<br>
+  </tbody>
+</table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")), new_admin_label_path, :class => 'btn btn-primary'  %>

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
+<div class="page-header">
+<h1><%= @label.name %></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @label.name %>
-</p>
+<%= render "admin/articles/table" %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")), admin_labels_path %>
