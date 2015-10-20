@@ -7,19 +7,23 @@
 
   @media only screen and (min-width: 40.063em) {
     h1, h2, h3, h4, h5, h6 {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
   }
 
   @media only screen and (max-width: 40em) {
     h1, h2, h3, h4, h5, h6 {
-      font-size: 1.2875rem;
+      font-size: 1.5rem;
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2 {
     border-bottom: 1px solid #DDDDDD;
-    margin-bottom: 1rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  h3, h4, h5, h6 {
+    margin-bottom: 1.5rem;
   }
 
   pre {

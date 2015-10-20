@@ -17,4 +17,4 @@
  *= require font-awesome
  *= require_self
  */
-@import "markdown";
+@import "markdown/gitHub2";
