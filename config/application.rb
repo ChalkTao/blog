@@ -36,5 +36,9 @@ module Blog
         Devise::UnlocksController.layout "admin"
         Devise::PasswordsController.layout "admin"
     end
+
+    # user defined configure
+    config.admin = 'caotao2003@163.com'
+
   end
 end
