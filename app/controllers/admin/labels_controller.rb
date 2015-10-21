@@ -13,7 +13,7 @@ class Admin::LabelsController < Admin::AdminController
   # GET /labels/1
   # GET /labels/1.json
   def show
-    @articles = Article.where(:id.in => @label.article_ids).desc(:created_at)
+    @articles = Kaminari.paginate_array(Article.where(:id.in => @label.article_ids).desc(:created_at)).page(params[:page])
   end
 
   # GET /labels/new

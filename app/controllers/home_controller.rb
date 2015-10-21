@@ -2,15 +2,12 @@ class HomeController < ApplicationController
   def index
   end
 
-  def welcome
-  end
-
   def about
   end
 
   def search
     @q = Article.ransack(params[:q])
-    @articles = @q.result
+    @articles = Kaminari.paginate_array(@q.result).page(params[:page]) 
   end
 
   def article
@@ -21,7 +18,7 @@ class HomeController < ApplicationController
   end
 
   def articles
-    @articles = Article.all
+    @articles = Kaminari.paginate_array(Article.all).page(params[:page])
   end
 
   def categories
@@ -31,11 +28,11 @@ class HomeController < ApplicationController
 
   def category
     @category = Category.find(params[:id])
-    @articles = Article.where(:category => @category.name).desc(:created_at)
+    @articles = Kaminari.paginate_array(Article.where(:category => @category.name).desc(:created_at)).page(params[:page]) 
   end
 
   def label
     @label = Label.find(params[:id])
-    @articles = Article.where(:id.in => @label.article_ids).desc(:created_at)
+    @articles = Kaminari.paginate_array(Article.where(:id.in => @label.article_ids).desc(:created_at)).page(params[:page]) 
   end
 end

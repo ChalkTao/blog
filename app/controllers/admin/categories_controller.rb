@@ -10,7 +10,7 @@ class Admin::CategoriesController < Admin::AdminController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @articles = Article.where(:category => @category.name).desc(:created_at)
+    @articles = Kaminari.paginate_array(Article.where(:category => @category.name).desc(:created_at)).page(params[:page])
   end
 
   # GET /categories/new

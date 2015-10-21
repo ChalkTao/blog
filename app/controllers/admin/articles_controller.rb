@@ -8,7 +8,7 @@ class Admin::ArticlesController < Admin::AdminController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.desc(:created_at)
+    @articles = Kaminari.paginate_array(Article.desc(:created_at)).page(params[:page])
   end
 
   # GET /articles/1
@@ -89,7 +89,7 @@ class Admin::ArticlesController < Admin::AdminController
 
   def search
     @q = Article.ransack(params[:q])
-    @articles = @q.result
+    @articles = Kaminari.paginate_array(@q.result).page(params[:page])
   end
 
   private
