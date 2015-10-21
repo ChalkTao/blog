@@ -1,4 +1,4 @@
 <%- model_class = Article -%>
-<div ng-controller="AdminArticlesController">
+<div ng-controller="AdminArticlesController" ng-init="init('<%= @article.id %>')">
 	<%= render :partial => 'form' %>
 </div>	

@@ -39,6 +39,7 @@ class Admin::ArticlesController < Admin::AdminController
     @article = Article.new(article_params)
     labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
+    update_category(params[:article][:category])
 
     respond_to do |format|
       if @article.save
@@ -56,6 +57,7 @@ class Admin::ArticlesController < Admin::AdminController
   def update
     labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
+    update_category(params[:article][:category])
 
     respond_to do |format|
       if @article.update(article_params)
@@ -90,11 +92,12 @@ class Admin::ArticlesController < Admin::AdminController
 
     def set_label
       @labels = Label.all
+      @categories = Category.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content)
+      params.require(:article).permit(:title, :content, :category)
     end
 
     def initialize_or_create_labels(labels)
@@ -104,5 +107,10 @@ class Admin::ArticlesController < Admin::AdminController
         label.save!
         @article.labels << label
       end
+    end
+
+    def update_category(name)
+      category = Category.find_or_initialize_by(name: name)
+      category.addArticle
     end
 end

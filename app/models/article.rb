@@ -4,9 +4,13 @@ class Article
 
   field :title, type: String
   field :content, type: String
+  field :category, type: String
   field :visit_count, type: Integer, default: 0
 
   has_and_belongs_to_many :labels
+
+  validates :title, :presence=>true, :uniqueness=> true
+  validates :content, :presence=>true, :length => { :minimum=> 20 }
 
   def labels_content( need_blank=false )
     content = self.labels.collect { |label| label.name }.join(", ")
