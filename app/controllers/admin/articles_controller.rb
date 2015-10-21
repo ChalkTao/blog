@@ -1,6 +1,7 @@
 class Admin::ArticlesController < Admin::AdminController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :set_label, only: [:new, :edit]
+  before_action :set_default_category, only: [:create, :update]
 
   include ApplicationHelper
 
@@ -39,7 +40,7 @@ class Admin::ArticlesController < Admin::AdminController
     @article = Article.new(article_params)
     labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
-    update_category(params[:article][:category])
+    add_category(params[:article][:category])
 
     respond_to do |format|
       if @article.save
@@ -57,7 +58,8 @@ class Admin::ArticlesController < Admin::AdminController
   def update
     labels = params[:article].delete(:labels).to_s
     initialize_or_create_labels(labels)
-    update_category(params[:article][:category])
+    minus_category(@article.category)
+    add_category(params[:article][:category])
 
     respond_to do |format|
       if @article.update(article_params)
@@ -73,6 +75,7 @@ class Admin::ArticlesController < Admin::AdminController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    minus_category(@article.category)
     @article.destroy
     respond_to do |format|
       format.html { redirect_to admin_articles_path, notice: 'Article was successfully destroyed.' }
@@ -109,8 +112,19 @@ class Admin::ArticlesController < Admin::AdminController
       end
     end
 
-    def update_category(name)
+    def set_default_category
+      if !params[:article][:category] || params[:article][:category] == nil
+        params[:article][:category] = "未分类"
+      end
+    end
+
+    def add_category(name)
       category = Category.find_or_initialize_by(name: name)
-      category.addArticle
+      category.update_count(1)
+    end
+
+    def minus_category(name)
+      category = Category.find_or_initialize_by(name: name)
+      category.update_count(-1)
     end
 end

@@ -7,7 +7,6 @@
       <th>标签</th>
       <th>浏览</th>
       <th>评论</th>
-      <th>操作</th>
     </tr>
   </thead>
   <tbody>
@@ -21,16 +20,7 @@
         <% end %>
       </td>
       <td><%= article.visit_count %></td>
-      <td><%= link_to t("models.comments"), disques_count(article, true), :"data-disqus-identifer" => article.id %></td>
-      <td>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_article_path(article), :class => 'btn btn-default btn-xs' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      admin_article_path(article),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
-                      :class => 'btn btn-xs btn-danger' %>
-      </td>
+      <td><%= link_to t("models.comments"), disques_count(article, false) %></td>
     </tr>
     <% end %>
   </tbody>

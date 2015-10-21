@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     # Use callbacks to share common setup or constraints between actions.
     def rend_side
       @side_label = Label.all
+      @side_categories = Category.all
       @recent_articles = Article.all.order(:created_at => :desc).limit(3)
     end
 end

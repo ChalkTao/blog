@@ -6,13 +6,15 @@
   <thead>
     <tr>
       <th>分类</th>
+      <th>文章数</th>
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
     <% @categories.each do |category| %>
     <tr>
-      <td><%= link_to category.name, admin_category_path(category)%></td>
+      <td><%= link_to category.name, admin_category_path(category) %></td>
+      <td><%= category.article_count %></td>
       <td>
         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_category_path(category),

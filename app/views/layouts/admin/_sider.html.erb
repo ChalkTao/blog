@@ -13,7 +13,20 @@
 	</ul>
 
 	<div class="panel-heading">
-		<div class="side"><%= t("admin.sider.labels") %></div> 
+		<div class="side"><%= t("models.categories.name") %></div> 
+	</div>
+  <!-- List group -->
+  <ul class="list-group">
+  <% @side_categories.each do |category| %>
+  	<li class="list-group-item">
+	    <span class="badge"><%= category.article_count %></span>
+	    <%= link_to category.name, admin_category_path(category) %>
+	  </li>
+  <% end %>
+  </ul>
+
+	<div class="panel-heading">
+		<div class="side"><%= t("models.labels.name") %></div> 
 	</div>
   <!-- List group -->
   <ul class="list-group">

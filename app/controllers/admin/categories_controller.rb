@@ -10,6 +10,7 @@ class Admin::CategoriesController < Admin::AdminController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @articles = Article.where(:category => @category.name).desc(:created_at)
   end
 
   # GET /categories/new
@@ -50,10 +51,17 @@ class Admin::CategoriesController < Admin::AdminController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_categories_path, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+    if @category.article_count > 0
+      respond_to do |format|
+        format.html { redirect_to admin_categories_path, notice: 'Category is not empty, can not be destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      @category.destroy
+      respond_to do |format|
+        format.html { redirect_to admin_categories_path, notice: 'Category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

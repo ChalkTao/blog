@@ -1,7 +1,7 @@
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+<div class="page-header">
+<h1><%= @category.name %></h1>
+</div>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= render "admin/articles/table" %>
+
+<%= link_to t('.back', :default => t("helpers.links.back")), admin_categories_path %>

@@ -3,8 +3,9 @@ class Category
   field :name, type: String
   field :article_count, type: Integer, default: 0
 
-  def addArticle
-    self.article_count += 1
+  def update_count(count)
+    self.article_count += count
+    self.article_count = 0 if self.article_count < 0
     self.save
   end
 end

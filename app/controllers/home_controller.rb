@@ -18,8 +18,14 @@ class HomeController < ApplicationController
     @next = Article.where(:created_at.gt => @article.created_at).asc(:created_at).first
   end
 
-  def category
+  def categories
   	@labels = Label.all
+    @categories = Category.all
+  end
+
+  def category
+    @category = Category.find(params[:id])
+    @articles = Article.where(:category => @category.name).desc(:created_at)
   end
 
   def label

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get 'home/about'
   get 'search/:keyword', to: 'home#search', as: :search
   get 'artcle/:id', to: 'home#article', as: :article
-  get 'category', to: 'home#category', as: :category
+  get 'categories', to: 'home#categories', as: :categories
+  get 'category/:id', to: 'home#category', as: :category
   get 'label/:id', to: 'home#label', as: :label
 
   namespace :admin do

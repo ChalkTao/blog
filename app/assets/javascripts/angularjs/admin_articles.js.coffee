@@ -11,11 +11,12 @@
       $scope.title = res.title
       $scope.content = res.content
       $scope.labels = res.labels || ""
+      $scope.category = res.category
     $http 
       url: '/admin/labels.json'
       method: 'GET'
     .success (res)->
-        $scope.all_labels = res
+      $scope.all_labels = res
 
   $scope.changeToBody = ->
     $scope.body_active = true
