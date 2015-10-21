@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'articles/show'
   get 'home/index'
   get 'home/about'
-  get 'search/:keyword', to: 'home#search', as: :search
+  get 'search', to: 'home#search', as: :search
+  get 'artcles', to: 'home#articles', as: :articles
   get 'artcle/:id', to: 'home#article', as: :article
   get 'categories', to: 'home#categories', as: :categories
   get 'category/:id', to: 'home#category', as: :category
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   	resources :articles do 
       collection do
         post :preview
+        get :search
       end
     end
   end

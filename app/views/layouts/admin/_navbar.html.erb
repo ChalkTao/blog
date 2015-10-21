@@ -12,11 +12,11 @@
         <li><%= link_to t('admin.navbar.categories'), admin_categories_path %></li>
         <li><%= link_to t('admin.navbar.labels'), admin_labels_path %></li>
       </ul>
-      <%= form_tag(admin_articles_path, method: :get, class: "navbar-form navbar-left search-form") do %>
+      <%= form_tag(search_admin_articles_path, method: :get, class: "navbar-form navbar-left search-form") do %>
         <div class="input-group">
-          <%= search_field_tag "q[name_cont]", params["q"] && params["q"]["name_cont"], class: "form-control input-sm", placeholder: t('admin.navbar.search') %>
+          <%= search_field_tag "q[title_cont]", params["q"] && params["q"]["title_cont"], class: "form-control input-sm", placeholder: "文章名称" %>
           <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            <button type="submit" class="btn btn-primary btn-sm" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </span>
         </div>
       <% end %>

@@ -38,13 +38,17 @@ zh-CN:
   app:
     navbar: 
       home: 首页
+      articles: 文章
       category: 分类
       about: 关于
     sider:
       articles: 文章
       labels: 标签
       recent_articles: 最新文章
+      all_articles: 全部文章
     index:
       title: 最新文章
+    search:
+      result: 搜索结果
 
 

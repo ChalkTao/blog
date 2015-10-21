@@ -87,6 +87,11 @@ class Admin::ArticlesController < Admin::AdminController
     render plain: markdown(params[:content])
   end
 
+  def search
+    @q = Article.ransack(params[:q])
+    @articles = @q.result
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article

@@ -9,6 +9,8 @@ class HomeController < ApplicationController
   end
 
   def search
+    @q = Article.ransack(params[:q])
+    @articles = @q.result
   end
 
   def article
@@ -16,6 +18,10 @@ class HomeController < ApplicationController
   	@article.visited
    	@prev = Article.where(:created_at.lt => @article.created_at).desc(:created_at).first
     @next = Article.where(:created_at.gt => @article.created_at).asc(:created_at).first
+  end
+
+  def articles
+    @articles = Article.all
   end
 
   def categories
