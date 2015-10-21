@@ -107,8 +107,8 @@ class Admin::ArticlesController < Admin::AdminController
       @article.labels = []
       labels.split(",").each do |name|
         label = Label.find_or_initialize_by(name: name.strip)
-        label.save!
         @article.labels << label
+        label.save!
       end
     end
 
