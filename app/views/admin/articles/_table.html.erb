@@ -13,7 +13,11 @@
   <tbody>
     <% @articles.each do |article| %>
     <tr>
-      <td><%= link_to article.title, admin_article_path(article)%></td>
+      <td>
+        <% if article.draft %>
+        [草稿]
+        <% end %>
+        <%= link_to article.title, admin_article_path(article)%></td>
       <td><%= article.category %></td>
       <td><%= l(article.created_at) %></td>
       <td><% article.labels.each do |label| %>

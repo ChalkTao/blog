@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       collection do
         post :preview
         get :search
+        get :draft
       end
     end
   end

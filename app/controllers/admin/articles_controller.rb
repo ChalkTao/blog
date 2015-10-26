@@ -38,9 +38,11 @@ class Admin::ArticlesController < Admin::AdminController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    labels = params[:article].delete(:labels).to_s
-    initialize_or_create_labels(labels)
-    add_category(params[:article][:category])
+    if params[:article][:draft] === "false"
+      labels = params[:article].delete(:labels).to_s
+      initialize_or_create_labels(labels)
+      add_category(params[:article][:category])
+    end
 
     respond_to do |format|
       if @article.save
@@ -57,9 +59,15 @@ class Admin::ArticlesController < Admin::AdminController
   # PATCH/PUT /articles/1.json
   def update
     labels = params[:article].delete(:labels).to_s
-    initialize_or_create_labels(labels)
-    minus_category(@article.category)
-    add_category(params[:article][:category])
+    puts "---------------------------"
+
+    if !params[:article][:draft] || params[:article][:draft] === "false"
+      initialize_or_create_labels(labels)
+      if !@article.draft
+        minus_category(@article.category)
+      end
+      add_category(params[:article][:category])
+    end
 
     respond_to do |format|
       if @article.update(article_params)
@@ -75,7 +83,9 @@ class Admin::ArticlesController < Admin::AdminController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
-    minus_category(@article.category)
+    if !@article.draft
+      minus_category(@article.category)
+    end
     @article.destroy
     respond_to do |format|
       format.html { redirect_to admin_articles_path, notice: 'Article was successfully destroyed.' }
@@ -92,6 +102,10 @@ class Admin::ArticlesController < Admin::AdminController
     @articles = Kaminari.paginate_array(@q.result).page(params[:page])
   end
 
+  def draft
+    @articles = Kaminari.paginate_array(Article.where(:draft => true)).page(params[:page])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
@@ -105,7 +119,7 @@ class Admin::ArticlesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :category)
+      params.require(:article).permit(:title, :content, :category, :draft)
     end
 
     def initialize_or_create_labels(labels)

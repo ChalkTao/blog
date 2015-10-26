@@ -22,6 +22,7 @@ zh-CN:
       categories: 管理分类
       labels: 管理标签
       search: 搜索文章
+      drafts: 草稿箱
     sider:
       articles: 文章
       new_article: 写文章
@@ -34,6 +35,7 @@ zh-CN:
       submit: 提交
       has_labels: 当前标签
       other_labels: 其他标签
+      draft: 保存为草稿
 
   app:
     navbar: 

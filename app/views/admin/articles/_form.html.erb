@@ -71,7 +71,13 @@
       </div>
     </div>
   </div>
-
+  <% if @article.draft %>
+  <div class="control-group">
+    <label class="control-label"><%= t("admin.form.draft") %></label>
+    <label class="control-label"><%= f.check_box :draft, {}, "true", "false" %></label>
+  </div>
+  <% end %>
+  
   <br/>
   <%= f.submit nil, :class => 'btn btn-primary' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
