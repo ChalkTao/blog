@@ -1,7 +1,7 @@
 module ApplicationHelper
   class CodeRayify < Redcarpet::Render::HTML
     def block_code(code, language)
-      CodeRay.scan(code, language).div
+        CodeRay.scan(code, language||:text).div
     end
   end
 
@@ -16,6 +16,7 @@ module ApplicationHelper
       :no_intra_emphasis => true,
       :autolink => true,
       :lax_html_blocks => true,
+      :tables => true
     }
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
     markdown_to_html.render(text).html_safe

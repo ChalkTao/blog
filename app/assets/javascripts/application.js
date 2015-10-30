@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require angularjs
 //= require twitter/bootstrap
+//= require articles
