@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe CategoriesController, type: :controller do
+RSpec.describe Admin::CategoriesController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Category. As you add validations to Category, be sure to
@@ -52,13 +52,6 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new category as @category" do
-      get :new, {}, valid_session
-      expect(assigns(:category)).to be_a_new(Category)
-    end
-  end
-
   describe "GET #edit" do
     it "assigns the requested category as @category" do
       category = Category.create! valid_attributes
@@ -69,11 +62,11 @@ RSpec.describe CategoriesController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Category" do
-        expect {
-          post :create, {:category => valid_attributes}, valid_session
-        }.to change(Category, :count).by(1)
-      end
+      # it "creates a new Category" do
+      #   expect {
+      #     post :create, {:category => valid_attributes}, valid_session
+      #   }.to change(Category, :count).by(1)
+      # end
 
       it "assigns a newly created category as @category" do
         post :create, {:category => valid_attributes}, valid_session
