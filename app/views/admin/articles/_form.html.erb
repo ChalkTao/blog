@@ -1,4 +1,6 @@
 <%= form_for [:admin, @article], :html => { :class => "form-horizontal article" } do |f| %>
+    
+    <input type="hidden" id="domain" value="<%= @domain %>">
 
     <% if @article.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -38,9 +40,21 @@
   <div class="control-group">
     <label class="control-label"> <%= t("admin.form.has_labels") %>
     </label>
-    <div class="controls">
-      <%= f.text_field :labels, :class => 'form-control', "ng-model"=>"labels" %>
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="controls">
+          <%= f.text_field :labels, :class => 'form-control', "ng-model"=>"labels" %>
+        </div>
+      </div>
+      <div class="col-lg-2">
+      <div id="container">
+          <a class="btn btn-default col-lg-12" id="pickfiles" href="#" >
+            <i class="glyphicon glyphicon-plus"></i><span><%= t("models.articles.image") %></span>
+          </a>
+        </div>
+      </div>
     </div>
+    
   </div>
 
   <div class="control-group">
@@ -52,8 +66,8 @@
         </a>
     </div>
   </div>
-
   <br/>
+
   <div class="control-group">
     <ul class="nav nav-tabs">
       <li role="presentation" ng-class="{ active: body_active }"><a href="#" ng-click="changeToBody()"><%= t("models.articles.edit") %></a></li>
@@ -83,4 +97,8 @@
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             admin_articles_path, :class => 'btn btn-default' %>
 
+<% end %>
+
+<% content_for :page_javascript do %>  
+  <%= javascript_include_tag "admin" %>
 <% end %>

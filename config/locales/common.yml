@@ -6,6 +6,7 @@ zh-CN:
     articles:
       edit: 编辑
       preview: 预览
+      image: 上传图片
       attributes:
         id: 文章id
         title: 标题

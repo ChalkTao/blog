@@ -106,6 +106,12 @@ class Admin::ArticlesController < Admin::AdminController
     @articles = Kaminari.paginate_array(Article.where(:draft => true)).page(params[:page])
   end
 
+  def upload
+    put_policy = Qiniu::Auth::PutPolicy.new(Rails.configuration.qiniu_bucket)
+    uptoken = Qiniu::Auth.generate_uptoken(put_policy)
+    render :json=> { uptoken: uptoken }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
@@ -115,6 +121,7 @@ class Admin::ArticlesController < Admin::AdminController
     def set_label
       @labels = Label.all
       @categories = Category.all
+      @domain = Rails.configuration.qiniu_domain
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

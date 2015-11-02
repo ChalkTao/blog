@@ -3,15 +3,16 @@
   $scope.body_active = true
 
   $scope.init = (id)->
-    url = '/admin/articles/' + id + '.json'
-    $http
-      url: url
-      method: 'GET'
-    .success (res)->
-      $scope.title = res.title
-      $scope.content = res.content
-      $scope.labels = res.labels || ""
-      $scope.category = res.category
+    if id
+      url = '/admin/articles/' + id + '.json'
+      $http
+        url: url
+        method: 'GET'
+      .success (res)->
+        $scope.title = res.title
+        $scope.content = res.content
+        $scope.labels = res.labels || ""
+        $scope.category = res.category
     $http 
       url: '/admin/labels.json'
       method: 'GET'

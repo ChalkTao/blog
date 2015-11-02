@@ -73,4 +73,8 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.qiniu_bucket = "blog"
+  config.qiniu_domain = "http://7xnzon.com1.z0.glb.clouddn.com/"
+
 end

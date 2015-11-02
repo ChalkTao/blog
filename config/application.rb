@@ -29,6 +29,8 @@ module Blog
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**/*.{rb,yml}').to_s]
     config.i18n.default_locale = "zh-CN"
 
+    config.assets.precompile += %w( admin.js )
+
     config.to_prepare do
         Devise::SessionsController.layout "admin"
         Devise::RegistrationsController.layout "admin"

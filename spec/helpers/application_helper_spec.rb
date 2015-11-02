@@ -11,5 +11,9 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ApplicationHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "Get qiniu token" do
+    it "returns token" do
+      expect(qiniu_token()).to_not be_nil
+    end
+  end
 end

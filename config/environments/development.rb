@@ -35,4 +35,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.qiniu_bucket = "blog"
+  config.qiniu_domain = "http://7xnzon.com1.z0.glb.clouddn.com/"
+
 end
