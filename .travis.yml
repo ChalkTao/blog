@@ -1,0 +1,20 @@
+# http://about.travis-ci.org/docs/user/build-configuration/
+language: ruby
+
+bundler_args: '--without production'
+
+script: bundle exec rake
+
+before_install:
+  - "cat /etc/timezone"
+  - "grep -i processor /proc/cpuinfo | wc -l"
+  - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+  - "gem install bundler --pre"
+  - "bundle -v"
+
+services:
+    - mongodb
+
+rvm:
+  - 2.0.0
+  - 2.1.0
