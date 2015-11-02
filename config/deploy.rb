@@ -21,7 +21,7 @@ set :keep_releases, 10
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'log', 'tmp', 'public/assets', 'public/uploads']
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'log', 'public/assets']
 
 
 # Optional SSH settings:
