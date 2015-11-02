@@ -15,56 +15,61 @@ set :deploy_to, '/home/lead/rails'
 set :repository, 'https://github.com/ChalkTao/blog.git'
 set :branch, 'nginx'
 set :keep_releases, 10
-set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml', 'config/puma.rb']
 
-# 这个块里面的代码表示运行 mina setup时运行的命令
+# For system-wide RVM install.
+#   set :rvm_path, '/usr/local/rvm/bin/rvm'
+
+# Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
+# They will be linked in the 'deploy:link_shared_paths' step.
+set :shared_paths, ['config/database.yml', 'config/secrets.yml', 'config/puma.rb', 'log']
+
+
+# Optional settings:
+set :user, '...'    # Username in the server to SSH to.
+
+# Optional SSH settings:
+# SSH forward agent to ensure that credentials are passed through for git operations
+#   set :port, '30000'     # SSH port number.
+set :forward_agent, true     # SSH forward_agent.
+
+# This task is the environment that is loaded for most commands, such as
+# `mina deploy` or `mina rake`.
+task :environment do
+  # If you're using rbenv, use this to load the rbenv environment.
+  # Be sure to commit your .ruby-version or .rbenv-version to your repository.
+  # invoke :'rbenv:load'
+
+  # For those using RVM, use this to load an RVM version@gemset.
+  invoke :'rvm:use[ruby-2.2.0@gemset]'
+end
+
+# Put any custom mkdir's in here for when `mina setup` is ran.
+# For Rails apps, we'll make some of the shared paths that are shared between
+# all releases.
 task :setup => :environment do
-
-  # 在服务器项目目录的shared中创建log文件夹
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
 
-  # 在服务器项目目录的shared中创建config文件夹 下同
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
-  queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
-
-  # puma.rb 配置puma必须得文件夹及文件
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
-
-  queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
-
-  queue! %[touch "#{deploy_to}/shared/config/puma.rb"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/puma.rb'."]
-
-  # tmp/sockets/puma.state
-  queue! %[touch "#{deploy_to}/shared/tmp/sockets/puma.state"]
-  queue  %[echo "-----> Be sure to edit 'shared/tmp/sockets/puma.state'."]
-
-  # log/puma.stdout.log
-  queue! %[touch "#{deploy_to}/shared/log/puma.stdout.log"]
-  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stdout.log'."]
-
-  # log/puma.stdout.log
-  queue! %[touch "#{deploy_to}/shared/log/puma.stderr.log"]
-  queue  %[echo "-----> Be sure to edit 'shared/log/puma.stderr.log'."]
-
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml'."]
+
+  # Puma needs a place to store its pid file and socket file.
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/sockets"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/sockets"]
+  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/tmp/pids"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/tmp/pids"]
 end
 
-#这个代码块表示运行 mina deploy时执行的命令
+
 desc "Deploys the current version to the server."
 task :deploy => :environment do
-  to :before_hook do
-  end
   deploy do
-    #重新拉git服务器上的最新版本，即使没有改变
+    # Put things that will set up an empty directory into a fully set-up
+    # instance of your project.
     invoke :'git:clone'
-    #重新设定shared_path位置
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
@@ -72,9 +77,69 @@ task :deploy => :environment do
     invoke :'deploy:cleanup'
 
     to :launch do
-      queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
-      # queue "chown -R www-data #{deploy_to}"
-      queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      # queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
+      # queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+      # queue! %[kill -USR2 `cat #{deploy_to}/shared/pids/puma.pid`]
+      # invoke :'puma:phased_restart'
     end
+  end
+end
+
+# For help in making your deploy script, see the Mina documentation:
+#
+#  - http://nadarei.co/mina
+#  - http://nadarei.co/mina/tasks
+#  - http://nadarei.co/mina/settings
+#  - http://nadarei.co/mina/helpers
+
+namespace :puma do
+  set :web_server, :puma
+
+  set_default :puma_role,      -> { user }
+  set_default :puma_env,       -> { fetch(:rails_env, 'production') }
+  set_default :puma_config,    -> { "#{deploy_to}/#{shared_path}/config/puma.rb" }
+  set_default :puma_socket,    -> { "#{deploy_to}/#{shared_path}/tmp/sockets/puma.sock" }
+  set_default :puma_state,     -> { "#{deploy_to}/#{shared_path}/tmp/sockets/puma.state" }
+  set_default :puma_pid,       -> { "#{deploy_to}/#{shared_path}/tmp/pids/puma.pid" }
+  set_default :puma_cmd,       -> { "#{bundle_prefix} puma" }
+  set_default :pumactl_cmd,    -> { "#{bundle_prefix} pumactl" }
+  set_default :pumactl_socket, -> { "#{deploy_to}/#{shared_path}/tmp/sockets/pumactl.sock" }
+
+  # Make necessary direcotries exist
+  task :setup => :environment do
+    queue! "#touch {deploy_to}/#{shared_path}/tmp/sockets/"
+    queue! "#touch {deploy_to}/#{shared_path}/tmp/pids/"
+  end
+
+  desc 'Start puma'
+  task :start => :environment do
+    queue! %[
+      if [ -e '#{pumactl_socket}' ]; then
+        echo 'Puma is already running!';
+      else
+        if [ -e '#{puma_config}' ]; then
+          cd #{deploy_to}/#{current_path} && #{puma_cmd} -q -d -e #{puma_env} -C #{puma_config}
+        else
+          cd #{deploy_to}/#{current_path} && #{puma_cmd} -q -d -e #{puma_env} -b 'unix://#{puma_socket}' -S #{puma_state} --control 'unix://#{pumactl_socket}'
+        fi
+      fi
+    ]
+  end
+
+  desc 'Stop puma'
+  task stop: :environment do
+    queue! %[
+      if [ -e '#{pumactl_socket}' ]; then
+        cd #{deploy_to}/#{current_path} && #{pumactl_cmd} -S #{puma_state} stop
+      else
+        echo 'Puma is not running!';
+      fi
+    ]
+  end
+
+  desc 'Restart puma'
+  task restart: :environment do
+    invoke :'puma:stop'
+    invoke :'puma:start'
   end
 end
