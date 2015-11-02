@@ -35,7 +35,7 @@ gem 'coderay'
 gem 'angularjs-rails'
 gem 'kaminari'
 gem 'qiniu', '~> 6.2.1'
-gem 'puma'
+gem 'puma', '2.14.0'
 
 gem 'mina', require: false
 
