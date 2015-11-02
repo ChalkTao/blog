@@ -15,7 +15,7 @@ set :deploy_to, '/home/lead/rails'
 set :repository, 'https://github.com/ChalkTao/blog.git'
 set :branch, 'nginx'
 set :keep_releases, 10
-set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml']
+set :shared_paths, ['config/database.yml', 'log', 'config/secrets.yml', 'config/puma.rb']
 
 # 这个块里面的代码表示运行 mina setup时运行的命令
 task :setup => :environment do

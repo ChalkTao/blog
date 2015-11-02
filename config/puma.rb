@@ -4,7 +4,7 @@ threads 2, 64
 workers 4
 
 #项目名
-app_name = "rails_blog"
+app_name = "blog"
 #项目路径
 application_path = "/home/lead/rails"
 #这里一定要配置为项目路径下地current
