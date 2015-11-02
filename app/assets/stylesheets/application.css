@@ -15,6 +15,6 @@
  *= require cerulean/bootswatch
  *= require bootstrap_and_overrides
  *= require font-awesome
+ *= markdown/gitHub2
  *= require_self
  */
-@import "markdown/gitHub2";
