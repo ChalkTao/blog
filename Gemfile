@@ -35,6 +35,10 @@ gem 'coderay'
 gem 'angularjs-rails'
 gem 'kaminari'
 gem 'qiniu', '~> 6.2.1'
+gem 'unicorn'
+
+gem 'mina', require: false
+gem 'mina-unicorn', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
