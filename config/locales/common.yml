@@ -16,6 +16,7 @@ zh-CN:
     categories: 
       name: 分类
       create: 新建分类
+      default: 未分类
 
   admin:
     navbar:	

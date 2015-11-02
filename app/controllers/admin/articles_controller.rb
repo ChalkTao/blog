@@ -140,7 +140,7 @@ class Admin::ArticlesController < Admin::AdminController
 
     def set_default_category
       if !params[:article][:category] || params[:article][:category] == nil
-        params[:article][:category] = "未分类"
+        params[:article][:category] = I18n.t('models.categories.default')
       end
     end
 
