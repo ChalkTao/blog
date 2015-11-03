@@ -129,17 +129,9 @@ test:
       database: blog_test
       hosts:
         - localhost:27017
-      options:
-        read:
-          mode: primary
-        max_pool_size: 1
 production:
   clients:
     default:
       database: blog_production
       hosts:
         - localhost:27017
-      options:
-        read:
-          mode: primary
-        max_pool_size: 1
