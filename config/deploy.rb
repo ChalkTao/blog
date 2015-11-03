@@ -109,8 +109,9 @@ namespace :puma do
   desc 'Stop puma'
   task stop: :environment do
     queue! %[
-      if [ -e '#{pumactl_socket}' ]; then
-        cd #{deploy_to}/#{current_path} && #{pumactl_cmd} -S #{puma_state} stop
+      if [ -e '#{puma_pid}' ]; then
+        pid=`cat #{puma_pid}`
+        kill -9 $pid
       else
         echo 'Puma is not running!';
       fi
