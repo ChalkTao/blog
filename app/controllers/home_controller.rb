@@ -18,7 +18,7 @@ class HomeController < ApplicationController
   end
 
   def articles
-    @articles = Kaminari.paginate_array(Article.all, :draft => false).page(params[:page])
+    @articles = Kaminari.paginate_array(Article.where(:draft => false)).page(params[:page])
   end
 
   def categories
