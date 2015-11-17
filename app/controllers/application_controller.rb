@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
     def rend_side
       @side_label = Label.desc(:id).limit(8)
       @side_categories = Category.all
-      @recent_articles = Article.all.order(:created_at => :desc, :draft => false).limit(3)
+      @recent_articles = Article.where(:draft => false).order(:created_at => :desc).limit(3)
     end
 end
